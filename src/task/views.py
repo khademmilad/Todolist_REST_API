@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect
 from task.models import TodoTask, Category
 from task.forms import TaskCreateForm
 from django.views.generic import DetailView
-
+from django.contrib import messages
 
 
 def show_task(request):
@@ -14,6 +14,7 @@ def show_task(request):
     form = TaskCreateForm(request.POST)
     if form.is_valid():
         form.save()
+        messages.success(request, "Task is added successfuly")
         return HttpResponseRedirect('/')
     else:
         form = TaskCreateForm()
